@@ -15,7 +15,6 @@ class CoursePublication extends Model
 
     protected $fillable = [
         'course_id',
-        'lesson_id',
         'test_id'
     ];
 

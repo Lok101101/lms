@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,17 +30,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/courses/publications/delete/{coursePublication}', [CourseController::class, 'deleteCoursePublication'])->name('deleteCoursePublication');
         Route::get('courses/{course}/add/tests', [TestController::class, 'getMyTests'])->name('testsListForAddToCourse');
         Route::post('/courses/{course}/add/{test}', [CourseController::class, 'addTestToCourse'])->name('addTestToCourse');
-        Route::get('courses/{course}/add/lessons', [LessonController::class, 'getMyLessons'])->name('lessonsListForAddToCourse');
-        Route::post('/courses/{course}/{lesson}', [CourseController::class, 'addLessonToCourse'])->name('addLessonToCourse');
         Route::view('/courses/create','courses.create-course')->name('createCoursePage');
         Route::post('/courses/create', [CourseController::class, 'createCourse'])->name('create-course');
-
-        Route::get('/lessons', [LessonController::class, 'getMyLessons'])->name('getMyLessons');
-        Route::get('/lesson/constructor', [LessonController::class, 'getLessonConstructor'])->name('newLessonConstructor');
-        Route::get('/lessons/{lesson}/constructor', [LessonController::class, 'getLessonConstructor'])->name('changeLessonConstructor');
-        Route::post('/lessons/create', [LessonController::class, 'createLesson'])->name('createLesson');
-        Route::post('/lessons/update/{lesson}', [LessonController::class, 'changeLesson'])->name('changeLesson');
-        Route::post('/lessons/delete/{lesson}', [LessonController::class, 'deleteLesson'])->name('deleteLesson');
 
         Route::get('/tests', [TestController::class, 'getMyTests'])->name('getMyTests');
         Route::view('/tests/constructor', 'tests.test-constructor')->name('testConstructor');
@@ -61,8 +51,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/courses/{course}', [CourseController::class, 'getCoursePublications'])->name('getCoursePublications');
-
-    Route::get('/lessons/{lesson}', [LessonController::class, 'getLesson'])->name('getLesson');
 });
 
 Route::middleware('guest')->group(function () {

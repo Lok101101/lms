@@ -45,24 +45,10 @@ class CoursePublicationsSeeder extends Seeder
         foreach ($structure as $courseKey => $pairs) {
             $courseId = $courses[$courseKey];
             foreach ($pairs as $pair) {
-                $lesson = DB::table('lessons')->where('name', $pair['lesson'])->first();
-                if ($lesson) {
-                    DB::table('courses_publications')->insert([
-                        'course_id' => $courseId,
-                        'lesson_id' => $lesson->id,
-                        'test_id' => null,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                } else {
-                    dump("Лекция не найдена: {$pair['lesson']}");
-                }
-
                 $test = DB::table('tests')->where('name', $pair['test'])->first();
                 if ($test) {
                     DB::table('courses_publications')->insert([
                         'course_id' => $courseId,
-                        'lesson_id' => null,
                         'test_id' => $test->id,
                         'created_at' => now(),
                         'updated_at' => now(),
