@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\CoursePublication;
-use App\Models\Lesson;
 use App\Models\Test;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -46,15 +45,6 @@ class CourseController extends Controller
         $coursePublication->delete();
 
         return redirect()->back();
-    }
-
-    public function addLessonToCourse(Course $course, Lesson $lesson) {
-        CoursePublication::create([
-            'course_id' => $course->id,
-            'lesson_id' => $lesson->id
-        ]);
-
-        return redirect()->route('getCoursePublications', ['course' => $course]);
     }
 
     public function addTestToCourse(Course $course, Test $test) {
